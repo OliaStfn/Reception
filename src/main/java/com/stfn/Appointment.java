@@ -1,7 +1,12 @@
 package com.stfn;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 public class Appointment {
     private int id;
     private static int nextId = 1;
@@ -26,48 +31,8 @@ public class Appointment {
         this.dateOfVisit = dateOfVisit;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setId() {
         id = nextId;
         nextId++;
-    }
-
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public int getPersonalProfileId() {
-        return personalProfileId;
-    }
-
-    public void setPersonalProfileId(int personalProfileId) {
-        this.personalProfileId = personalProfileId;
-    }
-
-    public String getCabNumb() {
-        return cabNumb;
-    }
-
-    public void setCabNumb(String cabNumb) {
-        this.cabNumb = cabNumb;
-    }
-
-    public LocalDateTime getDateOfVisit() {
-        return dateOfVisit;
-    }
-
-    public void setDateOfVisit(LocalDateTime dateOfVisit) {
-        this.dateOfVisit = dateOfVisit;
     }
 }

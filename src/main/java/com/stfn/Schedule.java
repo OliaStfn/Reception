@@ -1,16 +1,34 @@
 package com.stfn;
 
+import lombok.*;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.Map;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class Schedule {
-    private static Map<DayOfWeek, String> s = new HashMap<>();
+    private int id;
+    private HashMap<DayOfWeek, TimeTable> schedules;
 
-    public static void main(String[] args) {
-        LocalTime start = LocalTime.of(9,0);
-        LocalTime end = LocalTime.of(15,0);
-        s.put(DayOfWeek.MONDAY, "09:00 - 15:00");
+    public void addTimeTable(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {
+        schedules.put(dayOfWeek, new TimeTable(start, end));
+    }
+    public void deleteTimeTable(DayOfWeek dayOfWeek){
+        schedules.remove(dayOfWeek);
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @RequiredArgsConstructor
+    public class TimeTable {
+        private int id;
+        @NonNull
+        private LocalTime timeStart;
+        @NonNull
+        private LocalTime timeEnd;
     }
 }

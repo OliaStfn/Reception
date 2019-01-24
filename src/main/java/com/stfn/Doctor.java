@@ -1,9 +1,14 @@
 package com.stfn;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@Setter
+@Getter
 public class Doctor extends Person {
     private int id;
     private static int nextId = 1;
@@ -17,12 +22,6 @@ public class Doctor extends Person {
         specialization = "none";
         schedule = new Schedule();
         appointments = new ArrayList<>();
-    }
-
-    public Doctor(String specialization, Schedule schedule) {
-        this();
-        this.specialization = specialization;
-        this.schedule = schedule;
     }
 
     public Doctor(String name, String surname, LocalDate dateOfBirth, String specialization,
@@ -47,42 +46,8 @@ public class Doctor extends Person {
         }
     }
 
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setId() {
         id = nextId;
         nextId++;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
     }
 }

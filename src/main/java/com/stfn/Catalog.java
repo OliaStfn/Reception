@@ -1,8 +1,13 @@
 package com.stfn;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Setter
+@Getter
 public class Catalog {
     private int id;
     private static int nextId = 1;
@@ -12,35 +17,12 @@ public class Catalog {
     public Catalog() {
         setId();
         personalFiles = new ArrayList<>();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        doctors = new ArrayList<>();
     }
 
     public void setId() {
         id = nextId;
         nextId++;
-    }
-
-    public ArrayList<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(ArrayList<Doctor> doctors) {
-        this.doctors = doctors;
-    }
-
-    public ArrayList<PersonalFile> getPersonalFiles() {
-        return personalFiles;
-    }
-
-    public void setPersonalFiles(ArrayList<PersonalFile> personalFiles) {
-        this.personalFiles = personalFiles;
     }
 
     public PersonalFile searchById(int id) {
@@ -71,6 +53,34 @@ public class Catalog {
         return null;
     }
 
+    public Doctor searchDocById(int id) {
+        for (Doctor doctor : doctors) {
+            if (id == doctor.getId()) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
+    public Doctor searchDocByFullName(String name, String surname) {
+        for (Doctor doctor : doctors) {
+            if (name.equals(doctor.getName()) && surname.equals(doctor.getSurname())) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Doctor> searchDocBySpecialization(String specialization) {
+        ArrayList<Doctor> doctorSpec = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            if ((doctor.getSpecialization().toLowerCase()).contains(specialization.toLowerCase())) {
+                doctorSpec.add(doctor);
+            }
+        }
+        return doctorSpec;
+    }
+
     public void addPersonalFile(String name, String surname, LocalDate bornDate, String phoneNumber) {
         Person person = new Person(name, surname, bornDate);
         PersonalFile personalFile = new PersonalFile(phoneNumber, person);
@@ -90,9 +100,9 @@ public class Catalog {
         doctors.add(doctor);
     }
 
-    public void deleteDoctor(int id){
-        for(Doctor doctor:doctors){
-            if(id==doctor.getId()){
+    public void deleteDoctor(int id) {
+        for (Doctor doctor : doctors) {
+            if (id == doctor.getId()) {
                 doctors.remove(doctor);
             }
         }

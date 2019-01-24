@@ -1,8 +1,13 @@
 package com.stfn;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Setter
+@Getter
 public class PersonalFile {
     private int id;
     private static int nextId = 1;
@@ -16,7 +21,7 @@ public class PersonalFile {
         phoneNumb = "none";
         person = new Person();
         registrationDate = LocalDate.now();
-        appointments= new ArrayList<>();
+        appointments = new ArrayList<>();
     }
 
     public PersonalFile(String phoneNumb) {
@@ -29,51 +34,14 @@ public class PersonalFile {
         this.person = person;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setId() {
         id = nextId;
         nextId++;
     }
 
-    public String getPhoneNumb() {
-        return phoneNumb;
-    }
-
-    public void setPhoneNumb(String phoneNumb) {
-        this.phoneNumb = phoneNumb;
-        /*if(phoneNumb.startsWith("0")&& phoneNumb.length()==9){
+ /*   public void setPhoneNumb(String phoneNumb) {
+        if(phoneNumb.startsWith("0")&& phoneNumb.length()==9){
             this.phoneNumb="+38"+phoneNumb;
-        }else this.phoneNumb=phoneNumb;*/
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
-    }
+        }else this.phoneNumb=phoneNumb;
+    }*/
 }
