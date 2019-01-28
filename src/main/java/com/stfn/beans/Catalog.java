@@ -1,4 +1,4 @@
-package com.stfn;
+package com.stfn.beans;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,8 +36,8 @@ public class Catalog {
 
     public PersonalFile searchByFullName(String name, String surname) {
         for (PersonalFile personalFile : personalFiles) {
-            if (name.equals(personalFile.getPerson().getName())
-                    && surname.equals(personalFile.getPerson().getSurname())) {
+            if (name.equals(personalFile.getPerson().getFirstName())
+                    && surname.equals(personalFile.getPerson().getLastName())) {
                 return personalFile;
             }
         }
@@ -64,7 +64,7 @@ public class Catalog {
 
     public Doctor searchDocByFullName(String name, String surname) {
         for (Doctor doctor : doctors) {
-            if (name.equals(doctor.getName()) && surname.equals(doctor.getSurname())) {
+            if (name.equals(doctor.getFirstName()) && surname.equals(doctor.getLastName())) {
                 return doctor;
             }
         }

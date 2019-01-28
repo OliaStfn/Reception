@@ -1,4 +1,4 @@
-package com.stfn;
+package com.stfn.beans;
 
 import lombok.*;
 

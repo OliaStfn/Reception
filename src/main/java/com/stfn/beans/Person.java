@@ -1,4 +1,4 @@
-package com.stfn;
+package com.stfn.beans;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,25 +10,25 @@ import java.time.LocalDate;
 public class Person {
     private int id;
     private static int nextId = 1;
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
     private LocalDate dateOfBirth;
 
     public Person() {
         setId();
-        name = "none";
-        surname = "none";
+        firstName = "none";
+        lastName = "none";
         dateOfBirth = LocalDate.now();
     }
 
-    public Person(String name, String surname) {
+    public Person(String firstName, String lastName) {
         this();
-        this.name = name;
-        this.surname = surname;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Person(String name, String surname, LocalDate dateOfBirth) {
-        this(name, surname);
+    public Person(String firstName, String lastName, LocalDate dateOfBirth) {
+        this(firstName, lastName);
         this.dateOfBirth = dateOfBirth;
     }
 
