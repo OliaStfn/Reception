@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Setter
@@ -12,15 +13,16 @@ public class PersonalFile {
     private int id;
     private static int nextId = 1;
     private String phoneNumb;
-    private Person person;
-    private LocalDate registrationDate;
+    private String firstName;
+    private String lastName;
+    private LocalDate dateOfBirth;
+    private LocalDateTime registrationDate;
     private ArrayList<Appointment> appointments;
 
     public PersonalFile() {
         setId();
         phoneNumb = "none";
-        person = new Person();
-        registrationDate = LocalDate.now();
+        registrationDate= LocalDateTime.now();
         appointments = new ArrayList<>();
     }
 
@@ -29,10 +31,6 @@ public class PersonalFile {
         this.phoneNumb = phoneNumb;
     }
 
-    public PersonalFile(String phoneNumb, Person person) {
-        this(phoneNumb);
-        this.person = person;
-    }
 
     public void setId() {
         id = nextId;

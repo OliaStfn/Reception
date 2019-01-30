@@ -1,5 +1,7 @@
 package com.stfn.dao;
 
+import com.stfn.beans.Doctor;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -9,9 +9,12 @@ import java.util.ArrayList;
 
 @Setter
 @Getter
-public class Doctor extends Person {
+public class Doctor {
     private int id;
     private static int nextId = 1;
+    private String firstName;
+    private String lastName;
+    private LocalDate dateOfBirth;
     private String specialization;
     private Schedule schedule;
     private ArrayList<Appointment> appointments;
@@ -26,7 +29,9 @@ public class Doctor extends Person {
 
     public Doctor(String name, String surname, LocalDate dateOfBirth, String specialization,
                   Schedule schedule) {
-        super(name, surname, dateOfBirth);
+        this.firstName = name;
+        this.lastName = surname;
+        this.dateOfBirth = dateOfBirth;
         setId();
         appointments = new ArrayList<>();
         this.specialization = specialization;
@@ -38,9 +43,9 @@ public class Doctor extends Person {
         appointments.add(appointment);
     }
 
-    public void deleteAppointment(int id){
-        for (Appointment appointment: appointments){
-            if(id==appointment.getId()){
+    public void deleteAppointment(int id) {
+        for (Appointment appointment : appointments) {
+            if (id == appointment.getId()) {
                 appointments.remove(appointment);
             }
         }
