@@ -1,5 +1,6 @@
 package com.stfn.dao.MySQL;
 
+import com.stfn.beans.Person;
 import com.stfn.beans.PersonalFile;
 import com.stfn.dao.AbstractDao;
 
@@ -45,13 +46,15 @@ public class PersonalFileDao extends AbstractDao<PersonalFile> {
         try {
             while (resultSet.next()) {
                 PersonalFile temp = new PersonalFile();
+                Person person = new Person();
                 temp.setId(resultSet.getInt("id"));
-                temp.setFirstName(resultSet.getString("first_name"));
-                temp.setLastName(resultSet.getString("last_name"));
-                temp.setDateOfBirth(resultSet.getDate("date_of_birth").toLocalDate());
+                person.setFirstName(resultSet.getString("first_name"));
+                person.setLastName(resultSet.getString("last_name"));
+                person.setDateOfBirth(resultSet.getDate("date_of_birth").toLocalDate());
                 temp.setPhoneNumb(resultSet.getString("phone_number"));
                 temp.setRegistrationDate(resultSet.getTimestamp("registration_date").toLocalDateTime());
 
+                temp.setPerson(person);
                 personalFiles.add(temp);
             }
         } catch (Exception e) {
@@ -63,9 +66,9 @@ public class PersonalFileDao extends AbstractDao<PersonalFile> {
     @Override
     public void statementUpdate(PreparedStatement statement, PersonalFile obj) throws Exception {
         try {
-            statement.setString(1, obj.getFirstName());
-            statement.setString(2, obj.getLastName());
-            statement.setDate(3, Date.valueOf(obj.getDateOfBirth()));
+            statement.setString(1, obj.getPerson().getFirstName());
+            statement.setString(2, obj.getPerson().getLastName());
+            statement.setDate(3, Date.valueOf(obj.getPerson().getDateOfBirth()));
             statement.setString(4, obj.getPhoneNumb());
             statement.setTimestamp(5, Timestamp.valueOf(obj.getRegistrationDate()));
             statement.setInt(6, obj.getId());
@@ -77,15 +80,13 @@ public class PersonalFileDao extends AbstractDao<PersonalFile> {
     @Override
     public void statementInsert(PreparedStatement statement, PersonalFile obj) throws Exception {
         try {
-            statement.setString(1, obj.getFirstName());
-            statement.setString(2, obj.getLastName());
-            statement.setDate(3, Date.valueOf(obj.getDateOfBirth()));
+            statement.setString(1, obj.getPerson().getFirstName());
+            statement.setString(2, obj.getPerson().getLastName());
+            statement.setDate(3, Date.valueOf(obj.getPerson().getDateOfBirth()));
             statement.setString(4, obj.getPhoneNumb());
             statement.setTimestamp(5, Timestamp.valueOf(obj.getRegistrationDate()));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }

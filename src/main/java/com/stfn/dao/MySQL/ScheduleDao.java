@@ -1,6 +1,5 @@
 package com.stfn.dao.MySQL;
 
-import com.stfn.beans.Doctor;
 import com.stfn.beans.Schedule;
 import com.stfn.dao.AbstractDao;
 
@@ -41,7 +40,7 @@ public class ScheduleDao extends AbstractDao<Schedule> {
     }
 
     @Override
-    public Collection<Doctor> parseResultSet(ResultSet resultSet) throws Exception {
+    public Collection<Schedule> parseResultSet(ResultSet resultSet) throws Exception {
         return null;
     }
 

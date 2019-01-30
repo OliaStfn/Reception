@@ -1,7 +1,6 @@
 package com.stfn.dao.MySQL;
 
 import com.stfn.beans.Appointment;
-import com.stfn.beans.Doctor;
 import com.stfn.dao.AbstractDao;
 
 import java.sql.Connection;
@@ -40,7 +39,7 @@ public class AppointmentDao  extends AbstractDao<Appointment> {
     }
 
     @Override
-    public Collection<Doctor> parseResultSet(ResultSet resultSet) throws Exception {
+    public Collection<Appointment> parseResultSet(ResultSet resultSet) throws Exception {
         return null;
     }
 

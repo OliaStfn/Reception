@@ -11,19 +11,16 @@ import java.util.ArrayList;
 @Getter
 public class PersonalFile {
     private int id;
-    private static int nextId = 1;
     private String phoneNumb;
-    private String firstName;
-    private String lastName;
-    private LocalDate dateOfBirth;
     private LocalDateTime registrationDate;
     private ArrayList<Appointment> appointments;
+    private Person person;
 
     public PersonalFile() {
-        setId();
         phoneNumb = "none";
         registrationDate= LocalDateTime.now();
         appointments = new ArrayList<>();
+        person = new Person();
     }
 
     public PersonalFile(String phoneNumb) {
@@ -31,13 +28,12 @@ public class PersonalFile {
         this.phoneNumb = phoneNumb;
     }
 
-
-    public void setId() {
-        id = nextId;
-        nextId++;
+    public PersonalFile(String phoneNumb, Person person) {
+        this.phoneNumb = phoneNumb;
+        this.person = person;
     }
 
- /*   public void setPhoneNumb(String phoneNumb) {
+    /*   public void setPhoneNumb(String phoneNumb) {
         if(phoneNumb.startsWith("0")&& phoneNumb.length()==9){
             this.phoneNumb="+38"+phoneNumb;
         }else this.phoneNumb=phoneNumb;

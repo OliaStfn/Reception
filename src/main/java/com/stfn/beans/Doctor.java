@@ -9,19 +9,14 @@ import java.util.ArrayList;
 
 @Setter
 @Getter
-public class Doctor {
+public class Doctor extends Person{
     private int id;
-    private static int nextId = 1;
-    private String firstName;
-    private String lastName;
-    private LocalDate dateOfBirth;
     private String specialization;
     private Schedule schedule;
     private ArrayList<Appointment> appointments;
 
     public Doctor() {
         super();
-        setId();
         specialization = "none";
         schedule = new Schedule();
         appointments = new ArrayList<>();
@@ -29,10 +24,6 @@ public class Doctor {
 
     public Doctor(String name, String surname, LocalDate dateOfBirth, String specialization,
                   Schedule schedule) {
-        this.firstName = name;
-        this.lastName = surname;
-        this.dateOfBirth = dateOfBirth;
-        setId();
         appointments = new ArrayList<>();
         this.specialization = specialization;
         this.schedule = schedule;
@@ -49,10 +40,5 @@ public class Doctor {
                 appointments.remove(appointment);
             }
         }
-    }
-
-    public void setId() {
-        id = nextId;
-        nextId++;
     }
 }

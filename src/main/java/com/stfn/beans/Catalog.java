@@ -10,19 +10,12 @@ import java.util.ArrayList;
 @Getter
 public class Catalog {
     private int id;
-    private static int nextId = 1;
     private ArrayList<PersonalFile> personalFiles;
     private ArrayList<Doctor> doctors;
 
     public Catalog() {
-        setId();
         personalFiles = new ArrayList<>();
         doctors = new ArrayList<>();
-    }
-
-    public void setId() {
-        id = nextId;
-        nextId++;
     }
 
     public PersonalFile searchById(int id) {
