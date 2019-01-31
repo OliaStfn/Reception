@@ -28,17 +28,4 @@ public class Doctor extends Person{
         this.specialization = specialization;
         this.schedule = schedule;
     }
-
-    public void addAppointment(int doctorId, int personalFileId, String cabNumb, LocalDateTime visitDay) {
-        Appointment appointment = new Appointment(doctorId, personalFileId, cabNumb, visitDay);
-        appointments.add(appointment);
-    }
-
-    public void deleteAppointment(int id) {
-        for (Appointment appointment : appointments) {
-            if (id == appointment.getId()) {
-                appointments.remove(appointment);
-            }
-        }
-    }
 }
