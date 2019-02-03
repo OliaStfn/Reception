@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -38,4 +39,18 @@ public class PersonalFile {
             this.phoneNumb="+38"+phoneNumb;
         }else this.phoneNumb=phoneNumb;
     }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonalFile that = (PersonalFile) o;
+        return Objects.equals(phoneNumb, that.phoneNumb) &&
+                Objects.equals(person, that.person);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(phoneNumb, person);
+    }
 }

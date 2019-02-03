@@ -38,7 +38,7 @@ public class DoctorDao extends AbstractDao<Doctor> {
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM doctor WHERE id=?";
+        return "DELETE FROM doctor WHERE id=?;";
     }
 
     @Override

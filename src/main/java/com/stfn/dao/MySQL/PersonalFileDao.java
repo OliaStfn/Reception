@@ -37,7 +37,7 @@ public class PersonalFileDao extends AbstractDao<PersonalFile> {
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM personal_file WHERE id=?";
+        return "DELETE FROM personal_file WHERE id=?;";
     }
 
     @Override

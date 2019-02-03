@@ -11,6 +11,7 @@ import java.util.HashMap;
 @NoArgsConstructor
 public class Schedule {
     private int id;
+    private int doctorId;
     private HashMap<DayOfWeek, TimeTable> schedules;
 
     public void addTimeTable(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {
