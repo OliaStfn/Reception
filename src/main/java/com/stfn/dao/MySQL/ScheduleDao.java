@@ -1,15 +1,19 @@
 package com.stfn.dao.MySQL;
 
 import com.stfn.beans.Schedule;
+import com.stfn.beans.Timetable;
 import com.stfn.dao.AbstractDao;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 public class ScheduleDao extends AbstractDao<Schedule> {
 
@@ -19,7 +23,7 @@ public class ScheduleDao extends AbstractDao<Schedule> {
 
     @Override
     public String getCreateQuery() {
-        return null;
+        return "INSERT INTO doctor_schedule (doctor_id) VALUES(?);";
     }
 
     @Override
@@ -36,7 +40,7 @@ public class ScheduleDao extends AbstractDao<Schedule> {
 
     @Override
     public String getUpdateQuery() {
-        return null;
+        return "UPDATE timetable SET day_of_week=?, time_start=?,time_end=? WHERE id=?;";
     }
 
     @Override
@@ -58,14 +62,14 @@ public class ScheduleDao extends AbstractDao<Schedule> {
             for (Schedule schedule : schedules) {
                 if (schedule.getId() == id) {
                     exists = true;
-                    schedule.addTimeTable(DayOfWeek.valueOf(dayOfWeek),start,end);
+                    schedule.addTimeTable(DayOfWeek.valueOf(dayOfWeek), start, end);
                 }
             }
-            if(!exists){
+            if (!exists) {
                 Schedule schedule = new Schedule();
                 schedule.setId(id);
                 schedule.setDoctorId(doctorId);
-                schedule.addTimeTable(DayOfWeek.valueOf(dayOfWeek),start,end);
+                schedule.addTimeTable(DayOfWeek.valueOf(dayOfWeek), start, end);
 
                 schedules.add(schedule);
             }
@@ -75,11 +79,56 @@ public class ScheduleDao extends AbstractDao<Schedule> {
 
     @Override
     public void statementUpdate(PreparedStatement statement, Schedule obj) throws Exception {
+        throw new NotImplementedException();
+    }
 
+    public void statementUpdate(PreparedStatement statement, DayOfWeek dayOfWeek, Timetable obj) throws Exception {
+        try {
+            statement.setString(1, dayOfWeek.toString());
+            statement.setTime(2, Time.valueOf(obj.getTimeStart()));
+            statement.setTime(3, Time.valueOf(obj.getTimeEnd()));
+            statement.setInt(4, obj.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void statementInsert(PreparedStatement statement, Schedule obj) throws Exception {
+        statement.setInt(1, obj.getDoctorId());
+    }
 
+    @Override
+    public Schedule create(Schedule obj) throws Exception {
+        Schedule tempObj = null;
+        String query = getCreateQuery();
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statementInsert(statement, obj);
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        query = getSelectQuery() + "(SELECT last_insert_id();)";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+            Collection<Schedule> list = parseResultSet(resultSet);
+            tempObj = list.iterator().next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tempObj;
+    }
+
+    @Override
+    public void update(Schedule obj) throws Exception {
+        for (Map.Entry<DayOfWeek, Timetable> entry : obj.getSchedules().entrySet()) {
+            String query = getUpdateQuery();
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statementUpdate(statement, entry.getKey(), entry.getValue());
+                statement.execute();
+            } catch (Exception e) {
+                throw new Exception();
+            }
+        }
     }
 }

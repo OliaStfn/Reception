@@ -11,6 +11,23 @@ public class ScheduleService {
 
     public ScheduleService() {
         Factory factory = new Factory();
-        scheduleDao= (ScheduleDao) factory.getDao(Schedule.class);
+        scheduleDao = (ScheduleDao) factory.getDao(Schedule.class);
+    }
+
+    public void addSchedule(int doctorId) {
+        Schedule schedule = new Schedule(doctorId);
+        try {
+            scheduleDao.create(schedule);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteSchedule(int doctorId){
+        try {
+            scheduleDao.delete(doctorId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

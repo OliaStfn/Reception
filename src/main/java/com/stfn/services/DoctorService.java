@@ -75,5 +75,13 @@ public class DoctorService {
             e.printStackTrace();
         }
     }
+
+    public void updateDoctor(Doctor doctor){
+        try{
+            doctorDao.update(doctor);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 

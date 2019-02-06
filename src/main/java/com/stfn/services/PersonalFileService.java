@@ -15,15 +15,16 @@ public class PersonalFileService {
 
     public PersonalFileService() {
         Factory factory = new Factory();
-        personalFileDao= (PersonalFileDao) factory.getDao(PersonalFile.class);
+        personalFileDao = (PersonalFileDao) factory.getDao(PersonalFile.class);
     }
 
     public PersonalFile searchById(int id) {
         try {
-            return   personalFileDao.read(id);
+            return personalFileDao.read(id);
         } catch (Exception e) {
             e.printStackTrace();
-        }return  null;
+        }
+        return null;
     }
 
     public PersonalFile searchByFullName(String name, String surname) {
@@ -77,6 +78,14 @@ public class PersonalFileService {
         try {
             personalFileDao.delete(searchByPhone(phoneNumb).getId());
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePersonalFile(PersonalFile personalFile) {
+        try{
+            personalFileDao.update(personalFile);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

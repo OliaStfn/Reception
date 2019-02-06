@@ -9,27 +9,18 @@ import java.util.HashMap;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Schedule {
     private int id;
+    @NonNull
     private int doctorId;
-    private HashMap<DayOfWeek, TimeTable> schedules;
+    private HashMap<DayOfWeek, Timetable> schedules;
 
     public void addTimeTable(DayOfWeek dayOfWeek, LocalTime start, LocalTime end) {
-        schedules.put(dayOfWeek, new TimeTable(start, end));
+        schedules.put(dayOfWeek, new Timetable(start, end));
     }
     public void deleteTimeTable(DayOfWeek dayOfWeek){
         schedules.remove(dayOfWeek);
     }
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @RequiredArgsConstructor
-    public class TimeTable {
-        private int id;
-        @NonNull
-        private LocalTime timeStart;
-        @NonNull
-        private LocalTime timeEnd;
-    }
 }
